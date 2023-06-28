@@ -1,0 +1,13 @@
+.buttonSound{
+    width: 2.2em;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    
+    
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
