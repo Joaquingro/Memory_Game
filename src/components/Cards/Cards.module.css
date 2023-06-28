@@ -1,0 +1,20 @@
+.cardContainerFront{
+    padding: 3em;
+    width: 15em;
+    height: 16em;
+}
+
+.cardContainerBack{
+    background-color: rgb(26, 123, 187);
+    padding: 3em;
+    cursor: pointer;
+    width: 15em;
+    height: 16em;
+    display: flex;
+    justify-content: center;
+
+}
+
+.cardBack h1{
+    color: rgb(224, 211, 17)
+}

@@ -2,9 +2,19 @@ import { Link } from "react-router-dom";
 import styles from "../Landing/Landing.module.css";
 import logo from "../../assets/logo.svg"
 import 'animate.css';
+import { useEffect, useState } from "react";
 
 export function Landing () {
+    const [animate, setAnimate] = useState(true);
+
+    useEffect(() => {
+        // Desactivar la animación después de un cierto tiempo (1 segundo en este ejemplo)
+        const timer = setTimeout(() => {
+          setAnimate(false);
+        }, 1000);
     
+        return () => clearTimeout(timer);
+      }, []);
     
     return(
     <>
@@ -13,11 +23,13 @@ export function Landing () {
         <h1>Welcome to a Memory Game!</h1>
         <p> How lucky you are to find the pair of cards, try it!</p>
        
-        <Link className={styles.linki} to="/home"> <button type="button" class={`btn btn-secondary ${styles.start} ${"animate__animated animate__backInUp"} `}>Start Game</button> </Link>
+        <Link className={styles.linki} to="/home"> 
+        <button type="button" class={`btn btn-secondary ${styles.start}  ${animate ? "animate__animated animate__backInUp" : ""} `}>Start Game</button> 
+        </Link>
         
      </div>
     <div className={styles.containerBro}>
-        <img  class="animate__animated animate__backInDown" src= {logo} alt="pokemon logo"/>
+        <img  class="animate__animated animate__backInDown" src= {logo} alt="logo"/>
     </div>
     </div>
     </>
