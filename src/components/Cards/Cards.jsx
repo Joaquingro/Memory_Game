@@ -3,12 +3,22 @@ import moon from "../../assets/moon.svg";
 import star from "../../assets/star.svg";
 import sun from "../../assets/sun.svg";
 import comet from "../../assets/comet.svg";
+import correct from "../../assets/correct.mp3";
+import incorrect from "../../assets/incorrect.mp3";
+
 import { useEffect, useState } from "react";
 import 'animate.css';
 
 
 export function Cards(){
+    const [flippedCards, setFlippedCards] = useState([]);
+    const [isMatched, setIsMatched] = useState(false);
+    const [isMatch, setIsMatch] = useState(false);
+    const [selectedCards, setSelectedCards] = useState([]);
     const [image, setImage] = useState([]);
+    const audioCorrect = new Audio(correct);
+    const audioIncorrect = new Audio(incorrect);
+
     const imageArray = [
         { id: 1, img: moon, flipped: false, text: "The moon" },
         { id: 2, img: star, flipped: false, text: "The star" },
@@ -22,9 +32,9 @@ export function Cards(){
 
 
     useEffect(() => {
-        const doubledImages = [...imageArray];
-        setImage(doubledImages)
-        shuffleImages(doubledImages);
+        
+        setImage(imageArray)
+        shuffleImages(imageArray);
     }, [])
     
     const shuffleImages = (images) => {
@@ -34,9 +44,15 @@ export function Cards(){
           [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]];
         }
         setImage(shuffledImages);
+        setFlippedCards([]);
       };
 
     const handleFlip = (cardId) => {
+        // if (flippedCards.includes(cardId) || flippedCards.length === 2) {
+        //     return; 
+        //   }
+         
+
         setImage((prevImage) => {
             return prevImage.map((card) => {
               if (card.id === cardId) {
@@ -47,6 +63,52 @@ export function Cards(){
           });
     }
    
+    const resetFlippedCards = () => {
+        setTimeout(() => {
+            setImage((prevImage) => {
+              const updatedImage = [...prevImage];
+              selectedCards.forEach((selectedCard) => {
+                const index = updatedImage.findIndex((card) => card.id === selectedCard.id);
+                if (index !== -1) {
+                  updatedImage[index] = { ...updatedImage[index], flipped: false };
+                }
+              });
+              return updatedImage;
+          });
+          setSelectedCards([]);
+        }, 1000);
+      };
+      
+    const handleClickCompare = (cardId) => {
+        const selectedCard = image.find((card) => card.id === cardId);
+        
+        if (selectedCards.some((card) => card.id === cardId)) {
+          return; 
+        }
+        setSelectedCards((prevSelectedCards) => [...prevSelectedCards, selectedCard]);
+        console.log(selectedCards);
+        
+        if (selectedCards.length === 1) {
+          const firstCard = selectedCards[0];
+          if (firstCard.id !== selectedCard.id && firstCard.img === selectedCard.img) {
+            
+           setIsMatch(true);
+           audioCorrect.play();
+           setTimeout(() => {
+                setIsMatch(false);
+           }, 2000);
+          } else {
+            setIsMatched(true);
+            audioIncorrect.play();
+            setTimeout(() => {
+                setIsMatched(false);
+                resetFlippedCards();
+                
+           }, 1000);
+        }
+    }
+         
+    }
 
     return(
     <>
@@ -57,22 +119,33 @@ export function Cards(){
             
                 {card.flipped ? 
                 <div className={`card ${styles.cardContainerFront} ${card.flipped ? styles['flip-in-up'] : ''}`}>
-                    <div id = {index} className={`card-front ${styles.cardFront}`}>
+                    <div id = {index} className={`card-front ${styles.cardFront}` } >
                         <img src={card.img} className="card-img-top" alt="card"/>
                         <p>{card.text}</p>
                     </div>
                 </div> : 
-                <div className={`card ${styles.cardContainerBack} ${card.flipped ? styles['flip-out-up'] : ''}`} onClick={() => handleFlip(card.id)}>
+                <div className={`card ${styles.cardContainerBack} ${card.flipped ? styles['flip-out-up'] : ''}`} onClick={() => {
+                    handleFlip(card.id)
+                    handleClickCompare(card.id)
+                    }}>
                     <div className={`card-back ${styles.cardBack} `} >
                         <h1>?</h1>
                     </div>
                 </div>}
                
-                 
-            
         </div>
         
         ))}
+        {isMatched && 
+            <div>
+                <h3>Sorry, but this is not a match</h3>
+            </div>
+        }
+        {isMatch && 
+            <div>
+                <h3>Nice! it's a match</h3>
+            </div>
+        }
     </div>
     </div>
     </>
