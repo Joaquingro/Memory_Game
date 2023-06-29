@@ -12,9 +12,36 @@
     height: 16em;
     display: flex;
     justify-content: center;
+    
 
 }
 
 .cardBack h1{
     color: rgb(224, 211, 17)
 }
+
+@keyframes flipInUp {
+    from {
+      transform: rotateY(180deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+  
+  @keyframes flipOutUp {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(180deg);
+    }
+  }
+  
+  .flip-in-up {
+    animation: flipInUp 0.5s;
+  }
+  
+  .flip-out-up {
+    animation: flipOutUp 0.5s;
+  }
