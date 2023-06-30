@@ -9,6 +9,7 @@ import ticking from "../../assets/ticking.mp3";
 
 import { useEffect, useState } from "react";
 import 'animate.css';
+import { Modal } from "bootstrap";
 
 
 export function Cards(){
@@ -25,7 +26,24 @@ export function Cards(){
     const [isTimerPaused, setTimerPaused] = useState(false);
     
 
+//<--MODAL CONFIGURATION-->
+    useEffect(() => {
+      if (isMatched || isMatch) {
+        const modalElement = document.getElementById('myModal');
+        const modal = new Modal(modalElement, { backdrop: 'static' });
+        modal.show();
+  
+        setTimeout(() => {
+          modal.hide();
+          setIsMatched(false);
+          setIsMatch(false);
+        }, 2000);
+      }
+    }, [isMatched, isMatch]);
 
+
+
+//<--TIMER CONFIGURATION-->
   useEffect(() => {
     if (timeStatus) {
       const countdown = setTimeout(() => {
@@ -67,6 +85,7 @@ export function Cards(){
         shuffleImages(imageArray);
     }, [])
 
+
     //<--SORT CARDS IN HOME-->
     const shuffleImages = (images) => {
       const shuffledImages = [...images];
@@ -74,6 +93,7 @@ export function Cards(){
       setImage(shuffledImages);
     };
     
+
     //<--FLIP CARDS FUNCTION-->
     const handleFlip = (cardId) => {
         setImage((prevImage) => {
@@ -85,6 +105,8 @@ export function Cards(){
             });
           });
     }
+
+
    //<--FLIPPED CARDS IF NOT COINCIDENCE FUNCTION-->
     const resetFlippedCards = () => {
         setTimeout(() => {
@@ -99,7 +121,7 @@ export function Cards(){
               return updatedImage;
           });
           setSelectedCards([]);
-        }, 1000);
+        }, 500);
       };
       
       //<--COMPARE FUNCTION-->
@@ -111,7 +133,7 @@ export function Cards(){
         }
         
         if (selectedCards.length === 2) {
-          return; // Ya se han seleccionado dos cartas, no permitir más selecciones
+          return; 
         }
 
         setSelectedCards((prevSelectedCards) => [...prevSelectedCards, selectedCard]);
@@ -134,7 +156,7 @@ export function Cards(){
             setTimeout(() => {
               resetFlippedCards();
               setIsMatched(false);
-            }, 1000);
+            }, 2000);
           }
       
           setSelectedCards([]);
@@ -174,16 +196,16 @@ export function Cards(){
         </div>
         
         ))}
-        {isMatched && 
-            <div>
-                <h3>Sorry, but this is not a match</h3>
+  <div className="modal" id="myModal">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-body">
+              {isMatched && <h3>Sorry, but this is not a match</h3>}
+              {isMatch && <h3>Nice! it's a match</h3>}
             </div>
-        }
-        {isMatch && 
-            <div>
-                <h3>Nice! it's a match</h3>
-            </div>
-        }
+          </div>
+        </div>
+      </div>
 
         {matchesCount === 4 && "You did it"}
     </div>
