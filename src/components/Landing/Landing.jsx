@@ -8,7 +8,6 @@ export function Landing () {
     const [animate, setAnimate] = useState(true);
 
     useEffect(() => {
-        // Desactivar la animación después de un cierto tiempo (1 segundo en este ejemplo)
         const timer = setTimeout(() => {
           setAnimate(false);
         }, 1000);

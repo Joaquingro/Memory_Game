@@ -7,9 +7,9 @@ import correct from "../../assets/correct.mp3";
 import incorrect from "../../assets/incorrect.mp3";
 import ticking from "../../assets/ticking.mp3";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import 'animate.css';
-import { Modal } from "bootstrap";
+import { Modal, Toast } from "bootstrap";
 
 
 export function Cards(){
@@ -24,7 +24,28 @@ export function Cards(){
     const [timeStatus, setTimeStatus] = useState(false);
     const [matchesCount, setMatchesCount] = useState(0);
     const [isTimerPaused, setTimerPaused] = useState(false);
+    const [endGame, setEndGame] = useState(false);
+    const errorToastRef = useRef(null);
+    const successToastRef = useRef(null);
     
+    //<---TOAST FAIL-->
+    useEffect(() => {
+      if (endGame) {
+        const toastElement = errorToastRef.current;
+        const errorToast = new Toast(toastElement,  { autohide: false });
+        errorToast.show();
+      }
+    }, [endGame]);
+
+  //<--TOAST SUCCESS-->
+    useEffect(() => {
+      if (matchesCount === 4) {
+        const toastElement = successToastRef.current;
+        const successToast = new Toast(toastElement,  { autohide: false });
+        successToast.show();
+      }
+    }, [matchesCount]);
+  
 
 //<--MODAL CONFIGURATION-->
     useEffect(() => {
@@ -54,6 +75,7 @@ export function Cards(){
         audioTick.play();
       }
       if(timer === 0){
+        setEndGame(true);
         clearInterval(countdown);
       }
       if(matchesCount === 4){
@@ -163,15 +185,22 @@ export function Cards(){
         }
       }, [selectedCards]);
       
+    //<--TIMER STOP-->
     const handleClock = () => {
       setTimeStatus(true);
+    }
+
+    //<--RESET ALL-->
+    const handleReset = () => {
+      setTimer(30);
+      setEndGame(false);
+      setMatchesCount(0);
     }
 
     return(
     <>
     <div  className="container text-center">
       <p>Timer: {timer}</p>
-      <audio ref={audioTick} src={ticking} loop={true} />
         <div  className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
         {image && image.length > 0 && image.map((card, index) => (
         <div key={index} className="col mb-4">
@@ -200,14 +229,64 @@ export function Cards(){
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-body">
-              {isMatched && <h3>Sorry, but this is not a match</h3>}
-              {isMatch && <h3>Nice! it's a match</h3>}
+              {isMatched && <h5>Sorry, but this is not a match</h5>}
+              {isMatch && <h5>Nice! it's a match</h5>}
             </div>
           </div>
         </div>
       </div>
 
-        {matchesCount === 4 && "You did it"}
+        {matchesCount === 4 && (
+          <div className={styles.containerToast}>
+          <div
+          ref={successToastRef}
+          className={`toast show position-absolute top-50 start-50 translate-middle ${
+            matchesCount === 4 ? 'd-block' : 'd-none'
+          } ${styles.toastFail}`}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-backdrop="static"
+        >
+          <div className="toast-header">
+            <strong className="me-auto"><h4>Winner</h4></strong>
+            
+          </div>
+          <div className="toast-body">
+            <h5>You did it!</h5>
+          </div>
+          <div>
+             <button type="button" class="btn btn-primary" onClick={handleReset}>Play again</button>
+          </div>
+        </div>
+        </div>
+        )}
+
+        {endGame && (
+           <div className={styles.containerToast}>
+           <div
+           ref={errorToastRef}
+           className={`toast show position-absolute top-50 start-50 translate-middle ${
+             endGame ? 'd-block' : 'd-none'
+           } ${styles.toastFail}`}
+           role="alert"
+           aria-live="assertive"
+           aria-atomic="true"
+           data-backdrop="static"
+         >
+           <div className="toast-header">
+             <strong className="me-auto"><h4>Time is over</h4></strong>
+             
+           </div>
+           <div className="toast-body">
+             <h5>Oops you didn't find them all!</h5>
+           </div>
+           <div>
+              <button type="button" className="btn btn-primary" onClick={handleReset}>Play again</button>
+           </div>
+         </div>
+         </div>
+        )}
     </div>
     </div>
     </>
