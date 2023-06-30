@@ -4,12 +4,12 @@ import { Cards } from "../Cards/Cards.jsx";
 import soundOn from "../../assets/sound--on.svg";
 import soundOff from "../../assets/sound--off.svg";
 import soundBackground from "../../assets/background.mp3";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 
 export function Home () {
     const [isSoundOn, setIsSoundOn] = useState(true);
-    const audioRef = useRef(new Audio(soundBackground));
+    const audioRef = React.createRef(new Audio(soundBackground));
 
     useEffect(() => {
     const audio = audioRef.current;
