@@ -227,9 +227,9 @@ export function Cards(){
         {timer}s
       </div>
     </div>
-        <div  className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <div  className={`row row-cols-1 row-cols-sm-2 row-cols-md-4 ${styles.containerCards}`}>
         {image && image.length > 0 && image.map((card, index) => (
-        <div key={index} className="col mb-4">
+        <div key={index} className={`col mb-4 ${styles.column4}`}>
             
                 {card.flipped ? 
                 <div className={`card ${styles.cardContainerFront} ${card.flipped ? styles['flip-in-up'] : ''}`}>
@@ -254,7 +254,7 @@ export function Cards(){
  
               {isMatched &&  
               <div className={`modal ${styles.modals}`} id="myModal">
-                <div className="modal-dialog modal-dialog-centered">
+                <div className={`modal-dialog modal-dialog-centered ${styles.containerModal}`}>
                   <div className={`modal-content ${styles.textModal}`}>
                     <div className="modal-body">
                       <h5>Sorry, but this is not a match</h5> 

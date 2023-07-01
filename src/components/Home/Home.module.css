@@ -44,3 +44,13 @@
     animation: bounce 1s;
 
 }
+@media (max-width: 326px){
+    .container h1{
+        font-size: 35px;
+    }
+}
+@media (max-width: 391px) {
+}
+@media (min-width: 391px) and (max-width: 768px) {
+  
+}

@@ -12,6 +12,7 @@
     height: 16em;
     display: flex;
     justify-content: center;
+    
 
 }
 
@@ -77,8 +78,117 @@
     color: white;
   }
 
+  @media (max-width: 304px){
+    .progressBar{
+      width: auto;
+    }
+    .column4 {
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+    .containerCards{
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .cardContainerBack{
+      width: 4em;
+      height: 5em;
+    }
+
+    .cardContainerFront{
+      width: 4em;
+      height: 5em;
+    }
+  }
+
   @media (max-width: 391px) {
+    .progressBar{
+      width: auto;
+    }
+    .column4 {
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+    .containerCards{
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .cardContainerBack{
+      width: 7.5em;
+      height: 8em;
+      
+    }
+
+    .cardContainerFront{
+      width: 7.5em;
+      height: 8em;
+     
+    }
+
+    .cardContainerFront img{
+      width: 5em;
+      height: 5em;
+      margin-top: -35px;
+      margin-left: -30px;
+    }
+
+    .cardContainerFront p{
+      width: 5em;
+      margin-left: -30px;
+    }
+
+    .modalContainer{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .textModal{
+      margin: auto;
+    }
   }
   @media (min-width: 391px) and (max-width: 768px) {
-    /* Estilos para pantallas con ancho máximo de 768px */
+    .progressBar{
+      width: auto;
+    }
+    .column4 {
+      flex-basis: 25%;
+      max-width: 25%;
+    }
+    .containerCards{
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .cardContainerBack{
+      width: 7.5em;
+      height: 8em;
+    }
+
+    .cardContainerFront{
+      width: 7.5em;
+      height: 8em;
+    }
+
+    .cardContainerFront img{
+      width: 5em;
+      height: 5em;
+      margin-top: -35px;
+      margin-left: -30px;
+    }
+
+    .cardContainerFront p{
+      width: 5em;
+      margin-left: -30px;
+    }
+
+    
+
+
+    .textModal{
+     margin-left: 0;
+    }
   }
