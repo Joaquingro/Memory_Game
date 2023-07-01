@@ -1,6 +1,9 @@
 # Memory Card Game
 Hello! Welcome to the card memory game, to install this application follow the steps below...
 ---------------------------------------------------------------------------------------------
+![Imagen 1](./src/assets/example1.jpeg)
+![Imagen 2](./src/assets/example2.jpeg)
+
 1. Clone the code on your pc with
 ```bash
 git clone https://github.com/Joaquingro/Memory_Game.git
