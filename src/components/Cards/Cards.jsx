@@ -208,6 +208,7 @@ export function Cards(){
       handleFlipAllCards();
       setEndGame(false);
       setMatchesCount(0);
+      setTimerPaused(false);
     }
 
     
