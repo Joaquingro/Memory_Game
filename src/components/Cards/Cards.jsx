@@ -292,6 +292,7 @@ export function Cards(){
           </div>
           <div className="toast-body">
             <h5>You did it!</h5>
+            <h5>Your time: {30-timer}s</h5>
           </div>
           <div>
              <button type="button" class="btn btn-primary" onClick={handleReset}>Play again</button>
