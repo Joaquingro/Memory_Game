@@ -81,6 +81,7 @@ export function Cards(){
       }
       if(matchesCount === 4){
         setTimerPaused(true);
+        clearInterval(countdown);
       }
       if (isTimerPaused) {
         clearInterval(countdown); 
