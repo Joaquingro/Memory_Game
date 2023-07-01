@@ -76,3 +76,9 @@
     background-color: rgb(41, 133, 214);
     color: white;
   }
+
+  @media (max-width: 391px) {
+  }
+  @media (min-width: 391px) and (max-width: 768px) {
+    /* Estilos para pantallas con ancho máximo de 768px */
+  }
