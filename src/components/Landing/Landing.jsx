@@ -21,11 +21,11 @@ export function Landing () {
      <div className={styles.containerSon}>
         <h1>Welcome to a Memory Game!</h1>
         <p> How lucky you are to find the pair of cards, try it!</p>
-       
+       <div className={styles.buttonContainer}>
         <Link className={styles.linki} to="/home"> 
         <button type="button" class={`btn btn-secondary ${styles.start}  ${animate ? "animate__animated animate__backInUp" : ""} `}>Start Game</button> 
         </Link>
-        
+        </div>
      </div>
     <div className={styles.containerBro}>
         <img  class="animate__animated animate__backInDown" src= {logo} alt="logo"/>

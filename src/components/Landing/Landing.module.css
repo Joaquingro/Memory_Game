@@ -66,3 +66,44 @@
     animation: bounce 1s;
 
 }
+
+@media (max-width: 391px) {
+    .container{
+        height: 50em;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+    .containerBro img{
+        width: 10em;
+        height: 10em;
+        border-radius: 23px;
+        margin-top: -18em;
+        margin-bottom: 5em;
+    }
+
+    .buttonContainer{
+        margin-top: 8em;
+    }
+
+    .containerSon h1{
+        font-size: 2em;
+    }
+
+    .containerSon p{
+        font-size: 17px;
+    }
+
+    .start{
+        width: 8em;
+        height: 2em;
+        font-size: 15px;
+    }
+
+    
+}
+@media (min-width: 391px) and (max-width: 768px) {
+    .container{
+        height: 50em;
+    }
+}
