@@ -204,6 +204,7 @@ export function Cards(){
 
     //<--RESET ALL-->
     const handleReset = () => {
+      shuffleImages(imageArray)
       setTimeStatus(false);
       setTimer(30);
       handleFlipAllCards();
