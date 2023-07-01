@@ -16,7 +16,7 @@ export function Landing () {
       }, []);
     
     return(
-    <>
+    
     <div className={styles.container}>
      <div className={styles.containerSon}>
         <h1>Welcome to a Memory Game!</h1>
@@ -31,7 +31,7 @@ export function Landing () {
         <img  class="animate__animated animate__backInDown" src= {logo} alt="logo"/>
     </div>
     </div>
-    </>
+    
     )
     ;
 }

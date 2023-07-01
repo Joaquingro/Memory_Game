@@ -200,7 +200,18 @@ export function Cards(){
     return(
     <>
     <div  className="container text-center">
-      <p>Timer: {timer}</p>
+      <div className={`progress ${styles.progressBar}`}>
+      <div
+        className="progress-bar"
+        role="progressbar"
+        style={{ width: `${(timer / 30) * 100}%` }}
+        aria-valuenow={timer}
+        aria-valuemin="0"
+        aria-valuemax="30"
+      >
+        {timer}s
+      </div>
+    </div>
         <div  className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
         {image && image.length > 0 && image.map((card, index) => (
         <div key={index} className="col mb-4">

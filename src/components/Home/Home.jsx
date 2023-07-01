@@ -27,9 +27,9 @@ export function Home () {
 
 
     return(
-    <>
+    <div className={styles.container}>
     <h1>Let's Start!</h1>
-    <p>To start click on a card</p>
+    <p className={styles.p}>To start <strong>click</strong> on a card</p>
     <div className={styles.buttons}>
         <button className = {styles.buttonSound} onClick={toggleSound}>
         <audio ref={audioRef} src={soundBackground} loop={true} />
@@ -42,7 +42,7 @@ export function Home () {
     </div>
     
     <Cards/>
-    <Link to="/">Go back</Link>
-    </>)
+    
+    </div>)
     ;
 }

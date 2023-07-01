@@ -12,9 +12,9 @@
     height: 16em;
     display: flex;
     justify-content: center;
-    
 
 }
+
 
 .containerToast{
   position: fixed;
@@ -36,6 +36,11 @@
     color: rgb(224, 211, 17)
 }
 
+.progressBar{
+  width: 91.2em;
+  height: 2.5em;
+  margin-bottom: 10px;
+}
 @keyframes flipInUp {
     from {
       transform: rotateY(180deg);

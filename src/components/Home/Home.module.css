@@ -12,3 +12,12 @@
     justify-content: flex-end;
 }
 
+.container h1{
+    color: white;
+}
+.p{
+    color: white;
+}
+.p strong{
+    color: black;
+}
