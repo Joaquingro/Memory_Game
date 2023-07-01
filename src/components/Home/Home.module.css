@@ -22,3 +22,25 @@
 .p strong{
     color: black;
 }
+
+.start{
+    color: black;
+    background-color: white;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+
+.linki{
+    text-decoration: none;
+    color: white;
+}
+.linki:hover{
+    color: black;
+}
+.start:hover{
+    background-color: black;
+    color: white;
+    animation: bounce 1s;
+
+}

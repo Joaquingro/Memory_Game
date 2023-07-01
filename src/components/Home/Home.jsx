@@ -31,6 +31,10 @@ export function Home () {
     <h1>Let's Start!</h1>
     <p className={styles.p}>To start <strong>click</strong> on a card</p>
     <div className={styles.buttons}>
+      <Link className={styles.linki} to="/">
+      <button type="button" class={`btn btn-secondary ${styles.start}`}>Back</button> 
+
+      </Link>
         <button className = {styles.buttonSound} onClick={toggleSound}>
         <audio ref={audioRef} src={soundBackground} loop={true} />
         {isSoundOn ? (

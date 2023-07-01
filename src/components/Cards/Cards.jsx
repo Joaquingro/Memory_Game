@@ -10,6 +10,7 @@ import ticking from "../../assets/ticking.mp3";
 import { useEffect, useRef, useState } from "react";
 import 'animate.css';
 import { Modal, Toast } from "bootstrap";
+import { Link } from "react-router-dom";
 
 
 export function Cards(){
@@ -116,7 +117,7 @@ export function Cards(){
     };
     
 
-    //<--FLIP CARDS FUNCTION-->
+    //<--FLIP CARDS BY CLICK FUNCTION-->
     const handleFlip = (cardId) => {
         setImage((prevImage) => {
             return prevImage.map((card) => {
@@ -128,7 +129,17 @@ export function Cards(){
           });
     }
 
-
+    //<--FLIP ALL CARDS FUNCTION-->
+    const handleFlipAllCards = () => {
+      setImage((prevImage) => {
+        return prevImage.map((card) => {
+          if (card.flipped) {
+            return { ...card, flipped: false };
+          }
+          return card;
+        });
+      });
+    }
    //<--FLIPPED CARDS IF NOT COINCIDENCE FUNCTION-->
     const resetFlippedCards = () => {
         setTimeout(() => {
@@ -171,14 +182,14 @@ export function Cards(){
             setMatchesCount((prevMatchesCount) => prevMatchesCount + 1);
             setTimeout(() => {
               setIsMatch(false);
-            }, 2000);
+            }, 1500);
           } else {
             setIsMatched(true);
             audioIncorrect.play();
             setTimeout(() => {
               resetFlippedCards();
               setIsMatched(false);
-            }, 2000);
+            }, 1500);
           }
       
           setSelectedCards([]);
@@ -192,11 +203,14 @@ export function Cards(){
 
     //<--RESET ALL-->
     const handleReset = () => {
+      setTimeStatus(false);
       setTimer(30);
+      handleFlipAllCards();
       setEndGame(false);
       setMatchesCount(0);
     }
 
+    
     return(
     <>
     <div  className="container text-center">
@@ -236,16 +250,28 @@ export function Cards(){
         </div>
         
         ))}
-  <div className="modal" id="myModal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-body">
-              {isMatched && <h5>Sorry, but this is not a match</h5>}
-              {isMatch && <h5>Nice! it's a match</h5>}
-            </div>
-          </div>
-        </div>
-      </div>
+ 
+              {isMatched &&  
+              <div className={`modal ${styles.modals}`} id="myModal">
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className={`modal-content ${styles.textModal}`}>
+                    <div className="modal-body">
+                      <h5>Sorry, but this is not a match</h5> 
+                      </div>
+                  </div>
+                </div>
+              </div>}
+              {isMatch && 
+              <div className={`modal ${styles.modals}`} id="myModal">
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className={`modal-content ${styles.textModal}`}>
+                    <div className="modal-body">
+                      <h5>Nice! it's a match</h5> 
+                      </div>
+                  </div>
+                </div>
+              </div>}
+           
 
         {matchesCount === 4 && (
           <div className={styles.containerToast}>
