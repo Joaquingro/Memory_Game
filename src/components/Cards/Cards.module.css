@@ -115,7 +115,7 @@
     }
   }
 
-  @media (max-width: 391px) {
+  @media (max-width: 443px) {
     .progressBar{
       width: auto;
     }
@@ -164,7 +164,58 @@
       margin: auto;
     }
   }
-  @media (min-width: 391px) and (max-width: 768px) {
+
+  @media (min-width: 444px) and (max-width: 547px){
+    .progressBar{
+      width: auto;
+    }
+    .column4 {
+      flex-basis: 32%;
+      max-width: 32%;
+    }
+    .containerCards{
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .cardContainerBack{
+      width: 7.5em;
+      height: 8em;
+      
+    }
+
+    .cardContainerFront{
+      width: 7.5em;
+      height: 8em;
+     
+    }
+
+    .cardContainerFront img{
+      width: 5em;
+      height: 5em;
+      margin-top: -35px;
+      margin-left: -30px;
+    }
+
+    .cardContainerFront p{
+      width: 5em;
+      margin-left: -30px;
+    }
+
+    .modals{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+    }
+
+    .textModal{
+      margin: auto;
+    }
+  }
+
+  @media (min-width: 548px) and (max-width: 917px) {
     .progressBar{
       width: auto;
     }
